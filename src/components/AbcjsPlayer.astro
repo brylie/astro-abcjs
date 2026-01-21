@@ -17,8 +17,8 @@ const { notation, showControls = true, responsive = true } = Astro.props;
   data-notation={notation}
   data-responsive={responsive}
 >
-  <div id="paper"></div>
-  {showControls && <div id="audio" />}
+  <div id="paper" class="abcjs-paper"></div>
+  {showControls && <div id="audio" class="abcjs-audio" />}
 </div>
 
 <script>
@@ -78,11 +78,11 @@ const { notation, showControls = true, responsive = true } = Astro.props;
     max-width: 800px;
     margin: 0 auto;
   }
-  #paper {
+  .abcjs-paper {
     width: 100%;
     min-height: 200px;
   }
-  #audio {
+  .abcjs-audio {
     width: 100%;
     margin-top: 20px;
   }
