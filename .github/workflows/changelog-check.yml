@@ -1,0 +1,22 @@
+name: Check CHANGELOG update
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Check for CHANGELOG.md update
+        id: changelog
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff --name-only origin/${{ github.base_ref }} HEAD > changed_files.txt
+          if ! grep -q '^CHANGELOG.md$' changed_files.txt; then
+            echo '::error file=CHANGELOG.md::CHANGELOG.md was not updated in this pull request.'
+            exit 1
+          fi
+        shell: bash
