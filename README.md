@@ -15,10 +15,10 @@ import AbcjsPlayer from 'astro-abcjs/src/components/AbcjsPlayer.astro';
 ---
 
 <AbcjsPlayer
-  notation={`X:1\nT:Scale\nM:4/4\nK:C\nC D E F | G A B c |`} 
+  notation={`X:1\nT:Scale\nM:4/4\nK:C\nC D E F | G A B c |`}
   showControls={true}
   responsive={true}
-  abcjsVersion="6.6.0"  /* optional, defaults to 6.6.0 */
+  abcjsVersion="6.6.0"
 />
 ```
 
@@ -32,10 +32,10 @@ Import the component at the top of your MDX file:
 import AbcjsPlayer from 'astro-abcjs/src/components/AbcjsPlayer.astro';
 
 <AbcjsPlayer
-  notation={`X:1\nT:Scale\nM:4/4\nK:C\nC D E F | G A B c |`} 
+  notation={`X:1\nT:Scale\nM:4/4\nK:C\nC D E F | G A B c |`}
   showControls={true}
   responsive={true}
-  abcjsVersion="6.6.0"  /* optional, defaults to 6.6.0 */
+  abcjsVersion="6.6.0"
 />
 ```
 
@@ -44,7 +44,7 @@ import AbcjsPlayer from 'astro-abcjs/src/components/AbcjsPlayer.astro';
 - `notation` (string, required): The ABC notation string to render.
 - `showControls` (boolean, default: true): Show audio playback controls.
 - `responsive` (boolean, default: true): Make the notation responsive to container size.
-- `abcjsVersion` (string, default: "6.6.0"): The abcjs version to load from CDN. Override to pin or upgrade/downgrade.
+- `abcjsVersion` (string, optional, default: "6.6.0"): The abcjs version to load from CDN. Override to pin or upgrade/downgrade.
 
 ## Credits & Inspiration
 
