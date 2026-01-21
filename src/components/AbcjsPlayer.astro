@@ -27,7 +27,7 @@ const {
   {showControls && <div id="audio" class="abcjs-audio" />}
 </div>
 
-<script>
+<script define:vars={{ abcjsVersion }}>
   if (typeof window !== "undefined") {
     // Load abcjs browser build from CDN if not already loaded
     if (!window.ABCJS) {
