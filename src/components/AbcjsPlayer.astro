@@ -35,8 +35,11 @@ const {
 } = Astro.props;
 ---
 
-<div class="abcjs-container" data-notation={notation}>
+<div
+  class="abcjs-container"
+  data-notation={notation}
   data-options={JSON.stringify(options)}
+>
   <div class="abcjs-paper"></div>
   {showControls && <div class="abcjs-audio" />}
 </div>
