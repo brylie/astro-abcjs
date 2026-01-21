@@ -12,7 +12,11 @@ interface Props {
 const { notation, showControls = true, responsive = true } = Astro.props;
 ---
 
-<div class="abcjs-container" data-notation={notation}>
+<div
+  class="abcjs-container"
+  data-notation={notation}
+  data-responsive={responsive}
+>
   <div id="paper"></div>
   {showControls && <div id="audio" />}
 </div>
@@ -22,40 +26,33 @@ const { notation, showControls = true, responsive = true } = Astro.props;
     import("abcjs").then((abcjs) => {
       function initializeAbcjs() {
         const containers = document.querySelectorAll(".abcjs-container");
-        containers.forEach((container, index) => {
+        containers.forEach((container) => {
+          if (container.dataset.abcjsInitialized === "true") return;
           const notation = container.getAttribute("data-notation");
           if (!notation) return;
-
-          const paperId = `paper-${index}`;
-          const audioId = `audio-${index}`;
-
+          const isResponsive =
+            container.getAttribute("data-responsive") === "true";
           const paperDiv = container.querySelector("#paper");
           const audioDiv = container.querySelector("#audio");
-
-          if (paperDiv) paperDiv.id = paperId;
-          if (audioDiv) audioDiv.id = audioId;
-
           // Render music notation
-          const visualObj = abcjs.default.renderAbc(paperId, notation, {
-            responsive: responsive ? "resize" : undefined,
+          const visualObj = abcjs.default.renderAbc(paperDiv, notation, {
+            responsive: isResponsive ? "resize" : undefined,
             add_classes: true,
             paddingleft: 0,
             paddingright: 0,
             paddingbottom: 10,
-            padddingtop: 10,
+            paddingtop: 10,
           });
-
           // Audio playback controls
           if (audioDiv) {
             const synthControl = new abcjs.default.synth.SynthController();
-            synthControl.load(`#${audioId}`, null, {
+            synthControl.load(audioDiv, null, {
               displayLoop: true,
               displayRestart: true,
               displayPlay: true,
               displayProgress: true,
               displayWarp: true,
             });
-
             const createSynth = new abcjs.default.synth.CreateSynth();
             createSynth
               .init({ visualObj: visualObj[0] })
@@ -66,6 +63,7 @@ const { notation, showControls = true, responsive = true } = Astro.props;
                 console.warn("Audio synthesis initialization failed:", error);
               });
           }
+          container.dataset.abcjsInitialized = "true";
         });
       }
       initializeAbcjs();
