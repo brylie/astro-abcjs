@@ -1,28 +1,45 @@
 ---
 // AbcjsPlayer.astro
 // Reusable Astro component for rendering ABCjs music notation and audio playback
+
 import "abcjs/abcjs-audio.css";
+
+// Use official abcjs types
+import type {
+  AbcVisualParams,
+  TuneObject,
+  ClickListener,
+  Tablature,
+} from "abcjs";
+
+// Props interface using official abcjs types
+import type { AbcVisualParams } from "abcjs";
 
 interface Props {
   notation: string;
+  /**
+   * Options for abcjs.renderAbc (see AbcVisualParams in abcjs types)
+   */
+  options?: AbcVisualParams;
+  /**
+   * Show audio playback controls (default: true)
+   */
   showControls?: boolean;
-  responsive?: boolean;
+  /**
+   * abcjs version to load from CDN (default: "6.6.0")
+   */
   abcjsVersion?: string;
 }
 
 const {
   notation,
+  options = {},
   showControls = true,
-  responsive = true,
   abcjsVersion = "6.6.0",
 } = Astro.props;
 ---
 
-<div
-  class="abcjs-container"
-  data-notation={notation}
-  data-responsive={responsive}
->
+<div class="abcjs-container" data-notation={notation}>
   <div class="abcjs-paper"></div>
   {showControls && <div class="abcjs-audio" />}
 </div>
@@ -47,19 +64,11 @@ const {
         if (container.dataset.abcjsInitialized === "true") return;
         const notation = container.getAttribute("data-notation");
         if (!notation) return;
-        const isResponsive =
-          container.getAttribute("data-responsive") === "true";
         const paperDiv = container.querySelector(".abcjs-paper");
         const audioDiv = container.querySelector(".abcjs-audio");
-        // Render music notation
-        const visualObj = abcjs.renderAbc(paperDiv, notation, {
-          responsive: isResponsive ? "resize" : undefined,
-          add_classes: true,
-          paddingleft: 0,
-          paddingright: 0,
-          paddingbottom: 10,
-          paddingtop: 10,
-        });
+        // Render music notation using options prop
+        const userOptions = Astro.props.options || {};
+        const visualObj = abcjs.renderAbc(paperDiv, notation, userOptions);
         // Audio playback controls
         if (audioDiv && abcjs.synth) {
           const synthControl = new abcjs.synth.SynthController();
