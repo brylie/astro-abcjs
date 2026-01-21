@@ -1,5 +1,4 @@
 # Changelog
-# Changelog
 
 ## [2.0.0] - 2026-01-21
 
@@ -8,6 +7,7 @@
 - The AbcjsPlayer component now uses the official abcjs types for all props and options. The `options` prop is now fully type-safe and matches the abcjs `AbcVisualParams` interface. All custom type definitions have been removed in favor of direct imports from the abcjs package. This change improves compatibility and developer experience, but may require updates to user code that referenced the old prop structure or custom types.
 
 ### Removed
+
 - Deprecated and removed all custom type definitions for abcjs options, visual objects, click listeners, and tablature. Use types from the `abcjs` package instead.
 
 ## [1.1.0] - 2026-01-21
