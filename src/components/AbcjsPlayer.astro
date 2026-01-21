@@ -23,8 +23,8 @@ const {
   data-notation={notation}
   data-responsive={responsive}
 >
-  <div id="paper" class="abcjs-paper"></div>
-  {showControls && <div id="audio" class="abcjs-audio" />}
+  <div class="abcjs-paper"></div>
+  {showControls && <div class="abcjs-audio" />}
 </div>
 
 <script define:vars={{ abcjsVersion }}>
@@ -49,8 +49,8 @@ const {
         if (!notation) return;
         const isResponsive =
           container.getAttribute("data-responsive") === "true";
-        const paperDiv = container.querySelector("#paper");
-        const audioDiv = container.querySelector("#audio");
+        const paperDiv = container.querySelector(".abcjs-paper");
+        const audioDiv = container.querySelector(".abcjs-audio");
         // Render music notation
         const visualObj = abcjs.renderAbc(paperDiv, notation, {
           responsive: isResponsive ? "resize" : undefined,
