@@ -17,6 +17,9 @@ interface Props {
   notation: string;
   /**
    * Options for abcjs.renderAbc (see AbcVisualParams in abcjs types)
+   * Note: Function callbacks (e.g., clickListener) are not supported as options
+   * are serialized to JSON for client-side use. For advanced interactivity, use
+   * custom events or request a callback/event API.
    */
   options?: AbcVisualParams;
   /**
