@@ -36,6 +36,7 @@ const {
 ---
 
 <div class="abcjs-container" data-notation={notation}>
+  data-options={JSON.stringify(options)}
   <div class="abcjs-paper"></div>
   {showControls && <div class="abcjs-audio" />}
 </div>
@@ -63,7 +64,11 @@ const {
         const paperDiv = container.querySelector(".abcjs-paper");
         const audioDiv = container.querySelector(".abcjs-audio");
         // Render music notation using options prop (passed via define:vars)
-        const visualObj = abcjs.renderAbc(paperDiv, notation, options);
+        // Render music notation using per-container options
+        const containerOptions = JSON.parse(
+          container.getAttribute("data-options") || "{}",
+        );
+        const visualObj = abcjs.renderAbc(paperDiv, notation, containerOptions);
         // Audio playback controls
         if (audioDiv && abcjs.synth) {
           const synthControl = new abcjs.synth.SynthController();
