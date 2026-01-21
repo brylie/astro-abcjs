@@ -42,7 +42,7 @@ const {
   {showControls && <div class="abcjs-audio" />}
 </div>
 
-<script define:vars={{ abcjsVersion }}>
+<script define:vars={{ abcjsVersion, options }}>
   if (typeof window !== "undefined") {
     // Load abcjs browser build from CDN if not already loaded
     if (!window.ABCJS) {
@@ -64,9 +64,8 @@ const {
         if (!notation) return;
         const paperDiv = container.querySelector(".abcjs-paper");
         const audioDiv = container.querySelector(".abcjs-audio");
-        // Render music notation using options prop
-        const userOptions = Astro.props.options || {};
-        const visualObj = abcjs.renderAbc(paperDiv, notation, userOptions);
+        // Render music notation using options prop (passed via define:vars)
+        const visualObj = abcjs.renderAbc(paperDiv, notation, options);
         // Audio playback controls
         if (audioDiv && abcjs.synth) {
           const synthControl = new abcjs.synth.SynthController();
