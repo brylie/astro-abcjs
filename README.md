@@ -11,7 +11,7 @@ Import the component and use it in your Astro page or component:
 
 ```astro
 ---
-import AbcjsPlayer from 'astro-abcjs/src/components/AbcjsPlayer.astro';
+import AbcjsPlayer from 'astro-abcjs/AbcjsPlayer.astro';
 ---
 
 <AbcjsPlayer
@@ -29,7 +29,7 @@ First, make sure your project supports MDX and components in MDX.
 Import the component at the top of your MDX file:
 
 ```mdx
-import AbcjsPlayer from 'astro-abcjs/src/components/AbcjsPlayer.astro';
+import AbcjsPlayer from 'astro-abcjs/AbcjsPlayer.astro';
 
 <AbcjsPlayer
   notation={`X:1\nT:Scale\nM:4/4\nK:C\nC D E F | G A B c |`}
