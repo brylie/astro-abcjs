@@ -1,0 +1,40 @@
+{
+  "name": "astro-abcjs",
+  "version": "1.0.0",
+  "description": "An Astro component to embed abcjs in content",
+  "keywords": [
+    "astro",
+    "astro-component",
+    "abcjs",
+    "music",
+    "notation",
+    "MIDI"
+  ],
+  "homepage": "https://github.com/brylie/astro-abcjs#readme",
+  "bugs": {
+    "url": "https://github.com/brylie/astro-abcjs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brylie/astro-abcjs.git"
+  },
+  "license": "MIT",
+  "author": "Brylie Christopher Oxley",
+  "exports": {
+    "./AbcjsPlayer.astro": "./src/components/AbcjsPlayer.astro"
+  },
+  "scripts": {
+    "test": "echo 'No tests specified' && exit 0"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "abcjs": "^6.6.0"
+  }
+}
